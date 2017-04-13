@@ -32,7 +32,7 @@ module TagColumns
 
         define_method :"has_any_#{method_name}?" do |*values|
           values = self.class.tag_columns_sanitize_list(values)
-          existing = self[column_name] || []
+          existing = self.class.tag_columns_sanitize_list(self[column_name] || [])
           (values & existing).present?
         end
 
@@ -40,7 +40,7 @@ module TagColumns
 
         define_method :"has_all_#{method_name}?" do |*values|
           values = self.class.tag_columns_sanitize_list(values)
-          existing = self[column_name] || []
+          existing = self.class.tag_columns_sanitize_list(self[column_name] || [])
           (values & existing).size == values.size
         end
 
