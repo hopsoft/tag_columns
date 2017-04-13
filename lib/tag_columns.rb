@@ -20,25 +20,25 @@ module TagColumns
       @tag_columns.each do |column_name, initialized|
         next if initialized
 
-        column_name_plural = column_name.pluralize
+        method_name = column_name.downcase
         quoted_column_name = "#{quoted_table_name}.#{connection.quote_column_name column_name}"
 
-        scope :"with_any_#{column_name}",    ->(*tags) { where "#{quoted_column_name} && ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
-        scope :"with_all_#{column_name}",    ->(*tags) { where "#{quoted_column_name} @> ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
-        scope :"without_any_#{column_name}", ->(*tags) { where.not "#{quoted_column_name} && ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
-        scope :"without_all_#{column_name}", ->(*tags) { where.not "#{quoted_column_name} @> ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
+        scope :"with_any_#{method_name}",    ->(*tags) { where "#{quoted_column_name} && ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
+        scope :"with_all_#{method_name}",    ->(*tags) { where "#{quoted_column_name} @> ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
+        scope :"without_any_#{method_name}", ->(*tags) { where.not "#{quoted_column_name} && ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
+        scope :"without_all_#{method_name}", ->(*tags) { where.not "#{quoted_column_name} @> ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
 
         before_validation Proc.new { self[column_name] = self.class.tag_columns_sanitize_list(self[column_name]) }
 
-        define_method :"has_any_#{column_name_plural}?" do |*values|
+        define_method :"has_any_#{method_name}?" do |*values|
           values = self.class.tag_columns_sanitize_list(values)
           existing = self[column_name] || []
           (values & existing).present?
         end
 
-        alias_method :"has_#{column_name_plural}?", :"has_any_#{column_name_plural}?"
+        alias_method :"has_#{method_name.singularize}?", :"has_any_#{method_name}?"
 
-        define_method :"has_all_#{column_name_plural}?" do |*values|
+        define_method :"has_all_#{method_name}?" do |*values|
           values = self.class.tag_columns_sanitize_list(values)
           existing = self[column_name] || []
           (values & existing).size == values.size
