@@ -36,13 +36,13 @@ module TagColumns
           (values & existing).present?
         end
 
-        alias_method :"has_#{method_name.singularize}?", :"has_any_#{method_name}?"
-
         define_method :"has_all_#{method_name}?" do |*values|
           values = self.class.tag_columns_sanitize_list(values)
           existing = self.class.tag_columns_sanitize_list(self[column_name] || [])
           (values & existing).size == values.size
         end
+
+        alias_method :"has_#{method_name.singularize}?", :"has_all_#{method_name}?"
 
         @tag_columns[column_name] = true
       end
