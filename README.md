@@ -29,6 +29,7 @@ end
 ```
 
 ```ruby
+# app/models/user.rb
 class User < ApplicationRecord
   include TagColumns
   tag_columns :groups
