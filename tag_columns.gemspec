@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.authors     = ["Nathan Hopkins"]
   gem.email       = ["natehop@gmail.com"]
   gem.homepage    = "https://github.com/hopsoft/tag_columns"
-  gem.summary     = "Fast & simple model tagging using PostgreSQL's Array datatype"
+  gem.summary     = "Fast & simple Rails ActiveRecord model tagging using PostgreSQL's Array datatype"
 
   gem.files       = Dir["lib/**/*.rb", "bin/*", "[A-Z]*"]
   gem.test_files  = Dir["test/**/*.rb"]
