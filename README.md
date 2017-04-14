@@ -30,7 +30,8 @@ end
 
 ```ruby
 class User < ApplicationRecord
-  include SelfRenderer
+  include TagColumns
+  tag_columns :groups
 end
 ```
 
