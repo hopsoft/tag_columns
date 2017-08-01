@@ -33,7 +33,7 @@ gem "tag_columns"
 # db/migrate/TIMESTAMP_add_groups_to_user.rb
 class AddGroupsToUser < ActiveRecord::Migration[5.0]
   def change
-    add_column :users, :groups, :string, array: true, default: "{}", null: false
+    add_column :users, :groups, :string, array: true, default: [], null: false
     add_index :users, :groups, using: "gin"
   end
 end
