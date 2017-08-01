@@ -1,4 +1,13 @@
+[![Lines of Code](http://img.shields.io/badge/lines_of_code-42-brightgreen.svg?style=flat)](http://blog.codinghorror.com/the-best-code-is-no-code-at-all/)
+[![Code Status](http://img.shields.io/codeclimate/github/hopsoft/tag_columns.svg?style=flat)](https://codeclimate.com/github/hopsoft/tag_columns)
+[![Dependency Status](http://img.shields.io/gemnasium/hopsoft/tag_columns.svg?style=flat)](https://gemnasium.com/hopsoft/tag_columns)
+[![Build Status](http://img.shields.io/travis/hopsoft/tag_columns.svg?style=flat)](https://travis-ci.org/hopsoft/tag_columns)
+[![Coverage Status](https://img.shields.io/coveralls/hopsoft/tag_columns.svg?style=flat)](https://coveralls.io/r/hopsoft/tag_columns?branch=master)
+[![Downloads](http://img.shields.io/gem/dt/tag_columns.svg?style=flat)](http://rubygems.org/gems/tag_columns)
+
 # TagColumns
+
+[![Sponsor](https://app.codesponsor.io/embed/QMSjMHrtPhvfmCnk5Hbikhhr/hopsoft/tag_columns.svg)](https://app.codesponsor.io/link/QMSjMHrtPhvfmCnk5Hbikhhr/hopsoft/tag_columns)
 
 Fast & simple Rails ActiveRecord model tagging using [PostgreSQL's](https://www.postgresql.org/) [Array datatype](https://www.postgresql.org/docs/current/static/arrays.html).
 
