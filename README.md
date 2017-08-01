@@ -12,6 +12,7 @@
 Fast & simple Rails ActiveRecord model tagging using [PostgreSQL's](https://www.postgresql.org/) [Array datatype](https://www.postgresql.org/docs/current/static/arrays.html).
 
 *Similar to [acts_as_taggable_on](https://github.com/mbleigh/acts-as-taggable-on) but lighter weight with fewer features.*
+*Also, be sure to check out [acts_as_taggable_array_on](https://github.com/tmiyamon/acts-as-taggable-array-on).
 
 ## Use Cases
 
