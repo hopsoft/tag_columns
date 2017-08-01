@@ -23,6 +23,18 @@ module TagColumns
         method_name = column_name.downcase
         quoted_column_name = "#{quoted_table_name}.#{connection.quote_column_name column_name}"
 
+        define_singleton_method :"unique_#{method_name}" do |conditions='true'|
+          result = connection.execute <<~QUERY
+            SELECT DISTINCT unnest(#{quoted_column_name}) AS unique_#{method_name}
+            FROM #{quoted_table_name}
+            WHERE #{where(conditions).to_sql.split(/ WHERE /i).last}
+            AND #{quoted_column_name} IS NOT NULL
+            AND #{quoted_column_name} != '{}'
+            ORDER BY unique_#{method_name}
+          QUERY
+          result.values.flatten
+        end
+
         scope :"with_any_#{method_name}",    ->(*tags) { where "#{quoted_column_name} && ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
         scope :"with_all_#{method_name}",    ->(*tags) { where "#{quoted_column_name} @> ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
         scope :"without_any_#{method_name}", ->(*tags) { where.not "#{quoted_column_name} && ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
@@ -40,7 +52,7 @@ module TagColumns
           values = self.class.tag_columns_sanitize_list(values)
           existing = self.class.tag_columns_sanitize_list(self[column_name] || [])
           (values & existing).size == values.size
-        end
+       end
 
         alias_method :"has_#{method_name.singularize}?", :"has_all_#{method_name}?"
 

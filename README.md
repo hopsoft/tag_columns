@@ -1,4 +1,4 @@
-[![Lines of Code](http://img.shields.io/badge/lines_of_code-42-brightgreen.svg?style=flat)](http://blog.codinghorror.com/the-best-code-is-no-code-at-all/)
+[![Lines of Code](http://img.shields.io/badge/lines_of_code-53-brightgreen.svg?style=flat)](http://blog.codinghorror.com/the-best-code-is-no-code-at-all/)
 [![Code Status](http://img.shields.io/codeclimate/github/hopsoft/tag_columns.svg?style=flat)](https://codeclimate.com/github/hopsoft/tag_columns)
 [![Dependency Status](http://img.shields.io/gemnasium/hopsoft/tag_columns.svg?style=flat)](https://gemnasium.com/hopsoft/tag_columns)
 [![Build Status](http://img.shields.io/travis/hopsoft/tag_columns.svg?style=flat)](https://travis-ci.org/hopsoft/tag_columns)
@@ -66,4 +66,10 @@ non_writers             = User.without_any_groups(:writer)
 readers_or_writers      = User.with_any_groups(:reader, :writer)
 readers_and_writers     = User.with_all_groups(:reader, :writer)
 non_readers_and_writers = User.without_all_groups(:reader, :writer)
+
+# find unique tags across all users
+User.unique_groups
+
+# find unique tags for users with the last name 'Smith'
+User.unique_groups(last_name: "Smith")
 ```
