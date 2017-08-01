@@ -5,9 +5,9 @@
 [![Coverage Status](https://img.shields.io/coveralls/hopsoft/tag_columns.svg?style=flat)](https://coveralls.io/r/hopsoft/tag_columns?branch=master)
 [![Downloads](http://img.shields.io/gem/dt/tag_columns.svg?style=flat)](http://rubygems.org/gems/tag_columns)
 
-# TagColumns
-
 [![Sponsor](https://app.codesponsor.io/embed/QMSjMHrtPhvfmCnk5Hbikhhr/hopsoft/tag_columns.svg)](https://app.codesponsor.io/link/QMSjMHrtPhvfmCnk5Hbikhhr/hopsoft/tag_columns)
+
+# TagColumns
 
 Fast & simple Rails ActiveRecord model tagging using [PostgreSQL's](https://www.postgresql.org/) [Array datatype](https://www.postgresql.org/docs/current/static/arrays.html).
 
