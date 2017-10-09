@@ -35,10 +35,10 @@ module TagColumns
           result.values.flatten
         end
 
-        scope :"with_any_#{method_name}",    ->(*tags) { where "#{quoted_column_name} && ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
-        scope :"with_all_#{method_name}",    ->(*tags) { where "#{quoted_column_name} @> ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
-        scope :"without_any_#{method_name}", ->(*tags) { where.not "#{quoted_column_name} && ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
-        scope :"without_all_#{method_name}", ->(*tags) { where.not "#{quoted_column_name} @> ARRAY[?]::varchar[]", tag_columns_sanitize_list(tags) }
+        scope :"with_any_#{method_name}",    ->(*tags) { where "#{quoted_column_name}::text[] && ARRAY[?]::text[]", tag_columns_sanitize_list(tags) }
+        scope :"with_all_#{method_name}",    ->(*tags) { where "#{quoted_column_name}::text[] @> ARRAY[?]::text[]", tag_columns_sanitize_list(tags) }
+        scope :"without_any_#{method_name}", ->(*tags) { where.not "#{quoted_column_name}::text[] && ARRAY[?]::text[]", tag_columns_sanitize_list(tags) }
+        scope :"without_all_#{method_name}", ->(*tags) { where.not "#{quoted_column_name}::text[] @> ARRAY[?]::text[]", tag_columns_sanitize_list(tags) }
 
         before_validation Proc.new { self[column_name] = self.class.tag_columns_sanitize_list(self[column_name]) }
 
