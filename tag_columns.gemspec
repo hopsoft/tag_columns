@@ -18,5 +18,4 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rake"
   gem.add_development_dependency "pry-test"
   gem.add_development_dependency "coveralls"
-  gem.add_development_dependency "rubocop"
 end

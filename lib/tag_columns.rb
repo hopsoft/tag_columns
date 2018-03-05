@@ -35,6 +35,8 @@ module TagColumns
           result.values.flatten
         end
 
+        scope :"with_#{method_name}",        -> { where("#{quoted_column_name}::text[] IS NOT NULL").where("#{quoted_column_name}::text[] != '{}'") }
+        scope :"without_#{method_name}",     -> { where("#{quoted_column_name}::text[] IS NULL").or where("#{quoted_column_name}::text[] = '{}'") }
         scope :"with_any_#{method_name}",    ->(*tags) { where "#{quoted_column_name}::text[] && ARRAY[?]::text[]", tag_columns_sanitize_list(tags) }
         scope :"with_all_#{method_name}",    ->(*tags) { where "#{quoted_column_name}::text[] @> ARRAY[?]::text[]", tag_columns_sanitize_list(tags) }
         scope :"without_any_#{method_name}", ->(*tags) { where.not "#{quoted_column_name}::text[] && ARRAY[?]::text[]", tag_columns_sanitize_list(tags) }

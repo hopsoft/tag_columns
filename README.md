@@ -8,7 +8,6 @@
 # TagColumns
 
 Fast & simple Rails ActiveRecord model tagging using [PostgreSQL's](https://www.postgresql.org/) [Array datatype](https://www.postgresql.org/docs/current/static/arrays.html).
-
 *Similar to [acts_as_taggable_on](https://github.com/mbleigh/acts-as-taggable-on) but lighter weight with fewer features.*
 *Also, be sure to check out [acts_as_taggable_array_on](https://github.com/tmiyamon/acts-as-taggable-array-on).*
 
@@ -59,6 +58,8 @@ is_reader_or_writer  = user.has_any_groups?(:reader, :writer)
 is_reader_and_writer = user.has_all_groups?(:reader, :writer)
 
 # finding tagged records
+assigned                = User.with_groups
+unassigned              = User.without_groups
 writers                 = User.with_any_groups(:writer)
 non_writers             = User.without_any_groups(:writer)
 readers_or_writers      = User.with_any_groups(:reader, :writer)
