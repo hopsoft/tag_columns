@@ -33,7 +33,7 @@ module TagColumns
         end
 
         scope :"with_#{method_name}", -> {
-          where(arel_table[column_name].not_eq(nil)).where(arel_table[column_name].not_eq("{}"))
+          where.not(arel_table[column_name].eq(nil)).where.not(arel_table[column_name].eq("{}"))
         }
 
         scope :"without_#{method_name}", -> {
