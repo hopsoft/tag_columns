@@ -1,4 +1,4 @@
-[![Lines of Code](http://img.shields.io/badge/lines_of_code-53-brightgreen.svg?style=flat)](http://blog.codinghorror.com/the-best-code-is-no-code-at-all/)
+[![Lines of Code](http://img.shields.io/badge/lines_of_code-68-brightgreen.svg?style=flat)](http://blog.codinghorror.com/the-best-code-is-no-code-at-all/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7503486b1bb494b5d976/maintainability)](https://codeclimate.com/github/hopsoft/tag_columns/maintainability)
 [![Build Status](http://img.shields.io/travis/hopsoft/tag_columns.svg?style=flat)](https://travis-ci.org/hopsoft/tag_columns)
 [![Coverage Status](https://img.shields.io/coveralls/hopsoft/tag_columns.svg?style=flat)](https://coveralls.io/r/hopsoft/tag_columns?branch=master)
