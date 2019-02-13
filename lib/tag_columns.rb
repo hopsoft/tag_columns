@@ -56,8 +56,21 @@ module TagColumns
           where contains
         }
 
-        scope :"without_any_#{method_name}", ->(*tags) { where.not id: public_send(:"with_any_#{method_name}", *tags) }
-        scope :"without_all_#{method_name}", ->(*tags) { where.not id: public_send(:"with_all_#{method_name}", *tags) }
+        scope :"without_any_#{method_name}", ->(*tags) {
+          column_cast = Arel::Nodes::NamedFunction.new("CAST", [arel_table[column_name].as("text[]")])
+          value = Arel::Nodes::SqlLiteral.new(sanitize_sql_array(["ARRAY[?]", tag_columns_sanitize_list(tags)]))
+          value_cast = Arel::Nodes::NamedFunction.new("CAST", [value.as("text[]")])
+          overlap = Arel::Nodes::InfixOperation.new("&&", column_cast, value_cast)
+          where.not overlap
+        }
+
+        scope :"without_all_#{method_name}", ->(*tags) {
+          column_cast = Arel::Nodes::NamedFunction.new("CAST", [arel_table[column_name].as("text[]")])
+          value = Arel::Nodes::SqlLiteral.new(sanitize_sql_array(["ARRAY[?]", tag_columns_sanitize_list(tags)]))
+          value_cast = Arel::Nodes::NamedFunction.new("CAST", [value.as("text[]")])
+          contains = Arel::Nodes::InfixOperation.new("@>", column_cast, value_cast)
+          where.not contains
+        }
 
         before_validation -> { self[column_name] = self.class.tag_columns_sanitize_list(self[column_name]) }
 
