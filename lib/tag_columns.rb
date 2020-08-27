@@ -25,19 +25,19 @@ module TagColumns
 
         define_singleton_method :"unique_#{method_name}" do |conditions = "true"|
           unnest = Arel::Nodes::NamedFunction.new("unnest", [arel_table[column_name]])
-          query = distinct.select(unnest).
-            where(conditions).
-            where.not(arel_table[column_name].eq(nil)).
-            where.not(arel_table[column_name].eq("{}"))
+          query = distinct.select(unnest)
+            .where(conditions)
+            .where.not(arel_table[column_name].eq(nil))
+            .where.not(arel_table[column_name].eq("{}"))
           connection.execute(query.to_sql).values.flatten.sort
         end
 
         define_singleton_method :"#{method_name}_cloud" do |conditions = "true"|
           unnest = Arel::Nodes::NamedFunction.new("unnest", [arel_table[column_name]])
-          query = unscoped.select(unnest.as("tag")).
-            where(conditions).
-            where.not(arel_table[column_name].eq(nil)).
-            where.not(arel_table[column_name].eq("{}"))
+          query = unscoped.select(unnest.as("tag"))
+            .where(conditions)
+            .where.not(arel_table[column_name].eq(nil))
+            .where.not(arel_table[column_name].eq("{}"))
           from(query).group("tag").order("tag").pluck(Arel.sql("tag, count(*) as count"))
         end
 
