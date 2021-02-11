@@ -81,7 +81,7 @@ module TagColumns
           where.not contains
         }
 
-        before_validation -> { self[column_name] = self.class.tag_columns_sanitize_list(self[column_name]) }
+        before_validation -> { self[column_name] = self.class.tag_columns_sanitize_list(self[column_name] || []) }
 
         define_method :"has_any_#{method_name}?" do |*values|
           values = self.class.tag_columns_sanitize_list(values)
