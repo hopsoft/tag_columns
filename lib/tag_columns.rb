@@ -7,6 +7,7 @@ module TagColumns
 
   module ClassMethods
     def tag_columns_sanitize_list(values = [])
+      return [] if values.nil?
       values.select(&:present?).map(&:to_s).uniq.sort
     end
 
